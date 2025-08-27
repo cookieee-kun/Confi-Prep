@@ -1,9 +1,9 @@
 import React from "react";
 import {
-  FormItem,
-  FormLabel,
   FormControl,
   FormDescription,
+  FormItem,
+  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -17,19 +17,30 @@ interface FormFieldProps<T extends FieldValues> {
   type?: "text" | "email" | "password" | "file";
 }
 
-const FormField = ({ control, name, label, placeholder, type = 'text' }: FormFieldProps<T>) => (
+const FormField = <T extends FieldValues>({
+  control,
+  name,
+  label,
+  placeholder,
+  type = "text",
+}: FormFieldProps<T>) => (
   <Controller
     control={control}
     name={name}
-    render = {({ field }) => (
-    <FormItem>
-      <FormLabel>{label}</FormLabel>
-      <FormControl>
-        <Input className="input" placeholder={placeholder} {...field} type={type}/>
-      </FormControl>
-      <FormMessage />
-    </FormItem>
-  )}
+    render={({ field }) => (
+      <FormItem>
+        <FormLabel className="label">{label}</FormLabel>
+        <FormControl>
+          <Input
+            className="input"
+            placeholder={placeholder}
+            type={type}
+            {...field}
+          />
+        </FormControl>
+        <FormMessage />
+      </FormItem>
+    )}
   />
 );
 
